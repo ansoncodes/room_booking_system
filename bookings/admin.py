@@ -1,3 +1,19 @@
 from django.contrib import admin
+from .models import Room, Booking
 
-# Register your models here.
+
+@admin.register(Room)
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ("name", "capacity", "price_per_hour")
+
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = (
+        "room",
+        "guest_name",
+        "guest_count",
+        "start_datetime",
+        "end_datetime",
+        "total_price",
+    )
