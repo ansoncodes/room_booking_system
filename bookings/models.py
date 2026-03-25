@@ -21,14 +21,19 @@ class Booking(models.Model):
     )
 
     def _calculate_total_price(self):
-        """Compute price from duration (hours) × room's price_per_hour."""
+        """Compute price from duration (hours) × room's price_per_hour.
+
+        Minimum billing is 1 full hour — bookings shorter than 1 hour
+        (e.g. 15 min, 30 min) are still charged at the 1-hour rate.
+        """
         if self.start_datetime and self.end_datetime and self.room_id:
             duration_hours = Decimal(
                 str(
                     (self.end_datetime - self.start_datetime).total_seconds() / 3600
                 )
             )
-            return duration_hours * self.room.price_per_hour
+            billable_hours = max(duration_hours, Decimal("1"))
+            return billable_hours * self.room.price_per_hour
         return Decimal("0")
 
     def __str__(self):
