@@ -252,6 +252,38 @@ body {
 }
 
 /* ─── Feedback boxes ───────────────────────────────────────── */
+.booking-summary {
+  margin: 4px 0 20px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.booking-summary-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.booking-summary-line,
+.booking-summary-hint,
+.booking-summary-total {
+  font-size: 14px;
+}
+
+.booking-summary-line,
+.booking-summary-hint {
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.booking-summary-total {
+  margin-top: 10px;
+  color: var(--text);
+}
+
 .success-box {
   margin-top: 20px;
   padding: 16px 20px;
