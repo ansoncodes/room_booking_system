@@ -9,18 +9,9 @@ from .serializers import BookingSerializer, RoomSerializer
 
 # ─── Room Views ───────────────────────────────────────────────────────────────
 
-class RoomListCreateView(generics.ListCreateAPIView):
-    """GET /api/rooms/  — list all rooms
-       POST /api/rooms/ — create a room"""
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
-
-
-class RoomDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """GET    /api/rooms/{id}/ — retrieve a room
-       PUT    /api/rooms/{id}/ — full update
-       PATCH  /api/rooms/{id}/ — partial update
-       DELETE /api/rooms/{id}/ — delete"""
+class RoomListView(generics.ListAPIView):
+    """GET /api/rooms/ — read-only list of rooms for the React dropdown.
+    Rooms are created and managed exclusively through Django admin."""
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
@@ -77,14 +68,5 @@ class RoomAvailabilityView(APIView):
 class BookingListCreateView(generics.ListCreateAPIView):
     """GET  /api/bookings/ — list all bookings
        POST /api/bookings/ — create a booking (returns 201)"""
-    queryset = Booking.objects.select_related("room").all()
-    serializer_class = BookingSerializer
-
-
-class BookingDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """GET    /api/bookings/{id}/ — retrieve a booking
-       PUT    /api/bookings/{id}/ — full update
-       PATCH  /api/bookings/{id}/ — partial update
-       DELETE /api/bookings/{id}/ — delete"""
     queryset = Booking.objects.select_related("room").all()
     serializer_class = BookingSerializer

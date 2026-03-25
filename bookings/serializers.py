@@ -23,14 +23,12 @@ class BookingSerializer(serializers.ModelSerializer):
             "id",
             "room",
             "room_id",
-            "guest_name",
             "guest_count",
             "start_datetime",
             "end_datetime",
             "total_price",
-            "created_at",
         ]
-        read_only_fields = ["id", "total_price", "created_at"]
+        read_only_fields = ["id", "total_price"]
 
     def validate(self, data):
         start = data.get("start_datetime")
